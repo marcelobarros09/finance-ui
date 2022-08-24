@@ -1,0 +1,132 @@
+<app-header></app-header>
+
+<div class="container">
+  <div class="page-title">
+    <em class="pi pi-thumbs-up"></em>
+    Incomes
+  </div>
+
+  <p-toolbar>
+    <div class="p-toolbar-group-left">
+      <p-button
+        label="New"
+        icon="pi pi-plus"
+        styleClass="p-button-text p-button-secondary"
+      ></p-button>
+      <p-button
+        label="Refresh"
+        icon="pi pi-refresh"
+        styleClass="p-button-text p-button-secondary"
+        (onClick)="findByFilter()"
+      ></p-button>
+      <p-button
+        label="Export to Excel"
+        icon="pi pi-file-excel"
+        styleClass="p-button-text p-button-secondary"
+      ></p-button>
+
+      <span>|</span>
+
+      <p-button
+        label="Back"
+        icon="pi pi-replay"
+        styleClass="p-button-text p-button-secondary"
+      ></p-button>
+    </div>
+  </p-toolbar>
+
+  <br />
+
+  <form autocomplete="off" (ngSubmit)="findByFilter()">
+    <p-panel
+      header="Filters"
+      [toggleable]="true"
+      iconPos="left"
+      expandIcon="pi pi-angle-right"
+      collapseIcon="pi pi-angle-down"
+      [collapsed]="true"
+    >
+      <div class="formgrid grid">
+        <div class="field col-3">
+          <label for="description">Description</label>
+          <input
+            pInputText
+            [(ngModel)]="filter.description"
+            type="text"
+            name="description"
+            class="inputfield w-full"
+          />
+        </div>
+
+        <div class="field col-3">
+          <label for="dateDueStart">Date due start</label>
+          <p-calendar
+            [(ngModel)]="filter.dateDueStart"
+            dateFormat="dd/mm/yy"
+            name="dateDueStart"
+            [showIcon]="true"
+            [showButtonBar]="true"
+          ></p-calendar>
+        </div>
+
+        <div class="field col-3">
+          <label for="dateDueEnd">Date due end</label>
+          <p-calendar
+            [(ngModel)]="filter.dateDueEnd"
+            dateFormat="dd/mm/yy"
+            name="dateDueEnd"
+            [showIcon]="true"
+            [showButtonBar]="true"
+          ></p-calendar>
+        </div>
+
+        <div class="field col-3">
+          <label for="status">Status</label>
+          <p-selectButton
+            [(ngModel)]="filter.status"
+            [options]="statusOptions"
+            optionLabel="label"
+            optionValue="value"
+            name="status"
+          ></p-selectButton>
+        </div>
+      </div>
+    </p-panel>
+  </form>
+
+  <br />
+
+  <p-table
+    [value]="incomes"
+    [resizableColumns]="true"
+    [paginator]="true"
+    [rows]="10"
+    [showCurrentPageReport]="true"
+    [rowsPerPageOptions]="[10, 25, 50]"
+    [lazy]="true"
+    (onLazyLoad)="onLazyLoad($event)"
+    [loading]="loading"
+    [totalRecords]="totalRecords"
+    styleClass="p-datatable-sm p-datatable-gridlines p-datatable-striped"
+    responsiveLayout="scroll"
+  >
+    <ng-template pTemplate="header">
+      <tr>
+        <th pResizableColumn>Description</th>
+        <th pResizableColumn>Amount</th>
+        <th pResizableColumn>Date due</th>
+        <th pResizableColumn>Date receipt</th>
+        <th pResizableColumn>Status</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-income>
+      <tr>
+        <td>{{ income.description }}</td>
+        <td>{{ income.amount | currency }}</td>
+        <td>{{ income.dateDue | date: "dd/MM/yyyy" }}</td>
+        <td>{{ income.dateReceipt | date: "dd/MM/yyyy HH:mm" }}</td>
+        <td>{{ income.status }}</td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>

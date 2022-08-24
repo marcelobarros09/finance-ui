@@ -1,1 +1,135 @@
 /* You can add global styles to this file, and also import other style files */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+
+h2 {
+  margin: 0;
+}
+
+.container {
+  margin: 10px 60px;
+}
+
+.username {
+  margin: 3px 10px;
+  text-align: right;
+  font-size: 14px;
+}
+
+.page-title {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: #495057;
+}
+
+.button-group-item {
+  margin-right: 5px;
+}
+
+.p-menubar {
+  background: #f0efef;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+}
+
+.p-menuitem-text {
+  font-size: 0.85rem;
+}
+
+.p-menubar .p-menubar-root-list > .p-menuitem > .p-menuitem-link {
+  border-radius: 0px;
+  padding: 22px;
+}
+
+.p-menubar .p-submenu-list {
+  width: 15rem;
+}
+
+.p-fieldset-legend {
+  font-size: 0.85rem;
+}
+
+.p-fieldset.p-fieldset-toggleable .p-fieldset-legend a {
+  padding: 5px;
+}
+
+.p-inputtext {
+  font-size: 13px;
+  padding: 0.15rem 0.5rem;
+  background: #f9f9f9;
+  border-radius: 0;
+}
+
+.p-component {
+  font-size: 0.85rem;
+}
+
+/*.p-toolbar {
+  padding: 0.5rem;
+  background: #ffffff;
+  border: none;
+}*/
+
+.p-toolbar {
+  padding: 0;
+  border-radius: 0;
+  border: none;
+  border-bottom: 1px solid #dee2e6;
+  background: #ffffff;
+}
+
+.toolbar-no-border {
+  border: none !important;
+}
+
+.p-panel.p-panel-toggleable .p-panel-header {
+  padding: 0.1rem 0.5rem;
+  border-radius: 0;
+}
+
+.p-panel .p-panel-header .p-panel-title {
+  font-weight: 600;
+  font-size: 13px;
+}
+
+.p-panel .p-panel-content {
+  border-radius: 0;
+}
+
+.p-panel .p-panel-header .p-panel-header-icon {
+  height: 1.5rem;
+}
+
+.p-panel .p-panel-header .p-panel-header-icon {
+  border-radius: 0;
+}
+
+.p-button{
+  border-radius: 0px;
+}
+
+.p-selectbutton .p-button {
+  padding: 0.15rem 0.5rem;
+}
+
+.p-paginator-bottom .p-inputtext {
+  padding: 0.5rem 0.5rem;
+}
+
+.p-calendar {
+  width: 100%;
+}
+
+.p-button.p-button-icon-only {
+  width: 2.357rem;
+  padding: 0;
+}
+
+.p-datatable.p-datatable-sm .p-datatable-tbody > tr > td {
+  padding: 0.4rem 0.5rem;
+}
