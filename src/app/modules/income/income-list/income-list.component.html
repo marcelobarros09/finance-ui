@@ -47,7 +47,7 @@
       [collapsed]="true"
     >
       <div class="formgrid grid">
-        <div class="field col-3">
+        <div class="field col-4">
           <label for="description">Description</label>
           <input
             pInputText
@@ -58,7 +58,7 @@
           />
         </div>
 
-        <div class="field col-3">
+        <div class="field col-2">
           <label for="dateDueStart">Date due start</label>
           <p-calendar
             [(ngModel)]="filter.dateDueStart"
@@ -69,7 +69,7 @@
           ></p-calendar>
         </div>
 
-        <div class="field col-3">
+        <div class="field col-2">
           <label for="dateDueEnd">Date due end</label>
           <p-calendar
             [(ngModel)]="filter.dateDueEnd"
@@ -85,6 +85,7 @@
           <p-selectButton
             [(ngModel)]="filter.status"
             [options]="statusOptions"
+            [multiple]="true"
             optionLabel="label"
             optionValue="value"
             name="status"
