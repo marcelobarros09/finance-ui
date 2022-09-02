@@ -1,0 +1,47 @@
+<app-header></app-header>
+
+<div class="container">
+  <div class="page-title">
+    <em class="pi pi-thumbs-up"></em>
+    Income
+  </div>
+
+  <p-toolbar>
+    <div class="p-toolbar-group-left">
+      <p-button
+        label="Save"
+        icon="pi pi-save"
+        styleClass="p-button-text p-button-secondary"
+      ></p-button>
+      <p-button
+        *ngIf="isReceivable()"
+        label="Receive"
+        icon="pi pi-dollar"
+        styleClass="p-button-text p-button-secondary"
+      ></p-button>
+      <p-button
+        *ngIf="isCancelable()"
+        label="Cancel receipt"
+        icon="pi pi-dollar"
+        styleClass="p-button-text p-button-secondary"
+      ></p-button>
+      <p-button
+        *ngIf="!editing"
+        label="Clean"
+        icon="pi pi-times"
+        styleClass="p-button-text p-button-secondary"
+      ></p-button>
+
+      <span>|</span>
+
+      <p-button
+        [routerLink]="['/income']"
+        label="Back"
+        icon="pi pi-replay"
+        styleClass="p-button-text p-button-secondary"
+      ></p-button>
+    </div>
+  </p-toolbar>
+
+  <br />
+</div>

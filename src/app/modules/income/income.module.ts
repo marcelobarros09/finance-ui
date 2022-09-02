@@ -15,9 +15,10 @@ import { CalendarModule } from 'primeng/calendar';
 
 import { IncomeRoutingModule } from './income-routing.module';
 import { IncomeListComponent } from './income-list/income-list.component';
+import { IncomeComponent } from './income/income.component';
 
 @NgModule({
-  declarations: [IncomeListComponent],
+  declarations: [IncomeListComponent, IncomeComponent],
   imports: [
     CommonModule,
     IncomeRoutingModule,

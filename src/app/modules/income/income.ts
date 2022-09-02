@@ -1,8 +1,8 @@
-export interface Income {
-  id?: Number;
-  description: String;
-  amount: Number;
-  status: String;
-  dateDue: Date;
+export class Income {
+  id?: number;
+  description?: string;
+  amount?: number;
+  status?: string;
+  dateDue?: Date;
   dateReceipt?: Date;
 }

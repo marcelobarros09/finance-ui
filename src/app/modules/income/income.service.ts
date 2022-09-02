@@ -15,7 +15,7 @@ export interface IncomeFilter extends Pageable {
   dateReceiptEnd?: Date;
 }
 
-export interface IncomeResponse {
+export interface IncomeListResponse {
   content: Income[];
   pageable: any;
   totalPages: number;
@@ -32,7 +32,7 @@ export class IncomeService {
 
   constructor(protected http: HttpClient, private datePipe: DatePipe) {}
 
-  findByFilter(filter: IncomeFilter): Observable<IncomeResponse> {
+  findByFilter(filter: IncomeFilter): Observable<IncomeListResponse> {
     let params = new HttpParams()
       .set('page', filter.page!)
       .set('size', filter.size!);
@@ -59,8 +59,12 @@ export class IncomeService {
       params = params.set('status', filter.status[0]);
     }
 
-    return this.http.get<IncomeResponse>(this.baseUrl, {
+    return this.http.get<IncomeListResponse>(this.baseUrl, {
       params: params,
     });
+  }
+
+  findById(id: number): Observable<Income> {
+    return this.http.get<Income>(`${this.baseUrl}/${id}`);
   }
 }

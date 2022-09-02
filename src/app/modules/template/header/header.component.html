@@ -8,8 +8,8 @@
 
   <ul class="navbar-menu" [hidden]="!showMenu" (click)="closeMenu()">
     <li class="navbar-usuario">Marcelo Barros</li>
-    <li class="navbar-menuitem"><a routerLink="/">Dashboard</a></li>
-    <li class="navbar-menuitem"><a routerLink="/incomes">Income</a></li>
+    <li class="navbar-menuitem"><a routerLink="">Dashboard</a></li>
+    <li class="navbar-menuitem"><a [routerLink]="['/income']">Income</a></li>
     <li class="navbar-menuitem"><a href="javascript:;">Logout</a></li>
   </ul>
 
