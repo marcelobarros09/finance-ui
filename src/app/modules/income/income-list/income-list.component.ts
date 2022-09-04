@@ -57,4 +57,8 @@ export class IncomeListComponent implements OnInit {
     const size = event.rows;
     this.findByFilter(page, size);
   }
+
+  cleanFilters() {
+    this.filter = {};
+  }
 }

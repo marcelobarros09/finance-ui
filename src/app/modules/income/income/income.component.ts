@@ -1,7 +1,9 @@
+import { DatePipe } from '@angular/common';
 import { IncomeService } from './../income.service';
 import { Income } from './../income';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-income',
@@ -9,6 +11,10 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./income.component.css'],
 })
 export class IncomeComponent implements OnInit {
+  statusOptions = [
+    { label: 'OPEN', value: 'OPEN' },
+    { label: 'RECEIVED', value: 'RECEIVED' },
+  ];
   private id?: number;
   income = new Income();
   editing = false;
@@ -16,22 +22,94 @@ export class IncomeComponent implements OnInit {
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    private incomeService: IncomeService
+    private incomeService: IncomeService,
+    private messageService: MessageService
   ) {}
 
   ngOnInit(): void {
     this.id = this.activatedRoute.snapshot.params['id'];
 
     if (this.id) {
-      this.incomeService.findById(this.id).subscribe({
-        next: (result) => {
-          this.income = result
-          this.editing = true;
-          console.log(this.income)
-        },
-        error: (error) => this.onError(error),
-      });
+      this.findById(this.id);
+      this.editing = true;
+    } else {
+      this.income.status = 'OPEN';
     }
+  }
+
+  private findById(id: number) {
+    this.incomeService.findById(id).subscribe({
+      next: (result) => {
+        this.income = result;
+        this.convertDates(this.income);
+      },
+      error: (error) => this.onError(error),
+    });
+  }
+
+  save(): void {
+    if (!this.id) {
+      this.create();
+    } else {
+      this.update(this.id);
+    }
+  }
+
+  private update(id: number) {
+    this.incomeService.update(id, this.income).subscribe({
+      next: (result) => {
+        this.income = result;
+        this.convertDates(this.income);
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Success',
+          detail: 'Saved successfully',
+        });
+      },
+      error: (error) => this.onError(error),
+    });
+  }
+
+  private create() {
+    this.incomeService.create(this.income).subscribe({
+      next: (result) => {
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Success',
+          detail: 'Saved successfully',
+        });
+        this.router.navigate(['/income', result.id]);
+      },
+      error: (error) => this.onError(error),
+    });
+  }
+
+  receive(): void {
+    this.incomeService.receive(this.id!).subscribe({
+      next: (result) => {
+        this.findById(this.id!);
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Success',
+          detail: 'Received successfully',
+        });
+      },
+      error: (error) => this.onError(error),
+    });
+  }
+
+  cancelReceipt(): void {
+    this.incomeService.cancelReceipt(this.id!).subscribe({
+      next: (result) => {
+        this.findById(this.id!);
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Success',
+          detail: 'Receipt canceled successfully',
+        });
+      },
+      error: (error) => this.onError(error),
+    });
   }
 
   isReceivable(): boolean {
@@ -39,11 +117,29 @@ export class IncomeComponent implements OnInit {
   }
 
   isCancelable(): boolean {
-    return this.editing && this.income.status === 'RECEIVED';
+    return this.editing && this.isReceived();
+  }
+
+  isReceived(): boolean {
+    return this.income?.status === 'RECEIVED';
   }
 
   private onError(error: any) {
     console.error(error);
     alert(JSON.stringify(error));
+  }
+
+  private convertDates(income: Income) {
+    income.dateDue = this.parseToDate(income.dateDue!);
+
+    if (income.dateReceipt) {
+      income.dateReceipt = new Date(income.dateReceipt);
+    }
+  }
+
+  private parseToDate(dateString: any) {
+    var dateParts = dateString.split("-");
+    var date = new Date(dateParts[0], dateParts[1] - 1, dateParts[2]);
+    return date;
   }
 }

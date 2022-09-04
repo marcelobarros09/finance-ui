@@ -67,4 +67,20 @@ export class IncomeService {
   findById(id: number): Observable<Income> {
     return this.http.get<Income>(`${this.baseUrl}/${id}`);
   }
+
+  create(income: Income): Observable<Income> {
+    return this.http.post<Income>(`${this.baseUrl}`, income);
+  }
+
+  update(id: number, income: Income): Observable<Income> {
+    return this.http.put<Income>(`${this.baseUrl}/${id}`, income);
+  }
+
+  receive(id: number): Observable<void> {
+    return this.http.put<void>(`${this.baseUrl}/${id}/receipt`, {});
+  }
+
+  cancelReceipt(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.baseUrl}/${id}/receipt`);
+  }
 }

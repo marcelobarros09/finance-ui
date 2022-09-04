@@ -1,3 +1,4 @@
+import { SharedModule } from './../shared/shared.module';
 import { TemplateModule } from './../template/template.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -12,6 +13,7 @@ import { SelectButtonModule } from 'primeng/selectbutton';
 import { TableModule } from 'primeng/table';
 import { ChipModule } from 'primeng/chip';
 import { CalendarModule } from 'primeng/calendar';
+import { InputNumberModule } from 'primeng/inputnumber';
 
 import { IncomeRoutingModule } from './income-routing.module';
 import { IncomeListComponent } from './income-list/income-list.component';
@@ -33,6 +35,8 @@ import { IncomeComponent } from './income/income.component';
     FormsModule,
     HttpClientModule,
     CalendarModule,
+    InputNumberModule,
+    SharedModule
   ],
 })
 export class IncomeModule {}
