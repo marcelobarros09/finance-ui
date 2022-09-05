@@ -108,7 +108,7 @@
             <label for="dateDue">Date due</label>
             <p-calendar
               [(ngModel)]="income.dateDue"
-              dateFormat="yy-mm-dd"
+              dateFormat="dd/mm/yy"
               [touchUI]="false"
               [readonlyInput]="true"
               name="dateDue"
@@ -128,12 +128,19 @@
             <label for="dateReceipt">Date receipt</label>
             <p-calendar
               [(ngModel)]="income.dateReceipt"
-              dateFormat="yy-mm-dd"
+              dateFormat="dd/mm/yy"
               [showTime]="true"
               name="dateReceipt"
+              #dateReceipt="ngModel"
+              [required]="true"
               [showIcon]="true"
               [showButtonBar]="true"
             ></p-calendar>
+            <app-input-message
+              [control]="dateReceipt"
+              error="required"
+              text="Date receipt is required when income is received"
+            ></app-input-message>
           </div>
 
           <div class="col-offset-6" *ngIf="isReceived()"></div>

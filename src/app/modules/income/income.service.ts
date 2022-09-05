@@ -35,7 +35,8 @@ export class IncomeService {
   findByFilter(filter: IncomeFilter): Observable<IncomeListResponse> {
     let params = new HttpParams()
       .set('page', filter.page!)
-      .set('size', filter.size!);
+      .set('size', filter.size!)
+      .set('sort', 'description,asc')
 
     if (filter.description) {
       params = params.set('description', filter.description);
@@ -82,5 +83,9 @@ export class IncomeService {
 
   cancelReceipt(id: number): Observable<void> {
     return this.http.delete<void>(`${this.baseUrl}/${id}/receipt`);
+  }
+
+  delete(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.baseUrl}/${id}`);
   }
 }

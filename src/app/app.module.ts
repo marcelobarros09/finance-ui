@@ -1,4 +1,5 @@
-import { MessageService } from 'primeng/api';
+import { environment } from './../environments/environment';
+import { MessageService, ConfirmationService } from 'primeng/api';
 import { AppLayoutModule } from './layout/app.layout.module';
 import { CommonModule, DatePipe } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
@@ -16,9 +17,9 @@ function initializeKeycloak(keycloak: KeycloakService) {
   return () =>
     keycloak.init({
       config: {
-        url: 'http://localhost:8081',
-        realm: 'Finance',
-        clientId: 'finance-ui',
+        url: environment.keycloakUrl,
+        realm: environment.keycloakRealm,
+        clientId: environment.keycloakClientId,
       },
       initOptions: {
         checkLoginIframe: true,
@@ -50,6 +51,7 @@ function initializeKeycloak(keycloak: KeycloakService) {
     DatePipe,
     KeycloakService,
     MessageService,
+    ConfirmationService
   ],
   bootstrap: [AppComponent],
 })

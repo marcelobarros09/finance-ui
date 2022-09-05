@@ -1,3 +1,5 @@
+<p-confirmPopup></p-confirmPopup>
+
 <div class="grid">
   <div class="col-12">
     <div class="card p-fluid">
@@ -12,7 +14,7 @@
           collapseIcon="pi pi-angle-down"
           [collapsed]="true"
         >
-        <div class="p-fluid p-formgrid grid">
+          <div class="p-fluid p-formgrid grid">
             <div class="field col-12 md:col-6">
               <label for="description">Description</label>
               <input
@@ -99,31 +101,76 @@
         [loading]="loading"
         [totalRecords]="totalRecords"
         styleClass="p-datatable-gridlines p-datatable-striped"
-        responsiveLayout="scroll"
+        responsiveLayout="stack"
       >
         <ng-template pTemplate="header">
           <tr>
+            <th></th>
+            <th pResizableColumn>Status</th>
             <th pResizableColumn>Description</th>
             <th pResizableColumn>Amount</th>
             <th pResizableColumn>Date due</th>
             <th pResizableColumn>Date receipt</th>
-            <th pResizableColumn>Status</th>
-            <th></th>
+
           </tr>
         </ng-template>
         <ng-template pTemplate="body" let-income>
           <tr>
-            <td>{{ income.description }}</td>
-            <td>{{ income.amount | currency }}</td>
-            <td>{{ income.dateDue | date: "dd/MM/yyyy" }}</td>
-            <td>{{ income.dateReceipt | date: "dd/MM/yyyy HH:mm" }}</td>
-            <td>{{ income.status }}</td>
-            <td style="padding: 0rem 1rem; width: 5%;">
+            <td style="width: 5%">
               <div class="flex">
-                  <button pButton pRipple [routerLink]="['/income', income.id]" icon="pi pi-pencil" class="p-button-rounded p-button-outlined p-button-secondary mr-2"></button>
-                  <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-outlined p-button-secondary"></button>
+                <button
+                  pButton
+                  pRipple
+                  pTooltip="Edit"
+                  [routerLink]="['/income', income.id]"
+                  icon="pi pi-pencil"
+                  class="p-button-rounded p-button-outlined p-button-secondary mr-2"
+                ></button>
+                <button
+                  pButton
+                  pRipple
+                  pTooltip="Receive"
+                  *ngIf="income.status === 'OPEN'"
+                  (click)="receive(income.id)"
+                  icon="pi pi-dollar"
+                  class="p-button-rounded p-button-outlined p-button-secondary mr-2"
+                ></button>
+                <button
+                  pButton
+                  pRipple
+                  pTooltip="Delete"
+                  (click)="delete($event, income.id)"
+                  icon="pi pi-trash"
+                  class="p-button-rounded p-button-outlined p-button-secondary"
+                ></button>
               </div>
-          </td>
+            </td>
+            <td style="width: 5%">
+              <span class="p-column-title">Status:</span>
+              <p-tag
+                [rounded]="true"
+                severity="{{ income.status == 'OPEN' ? 'danger' : 'success' }}"
+                value="{{ income.status }}"
+              ></p-tag>
+            </td>
+            <td>
+              <span class="p-column-title">Description:</span>
+              {{ income.description }}
+            </td>
+            <td>
+              <span class="p-column-title">Amount:</span>
+              {{ income.amount | currency }}
+            </td>
+            <td>
+              <span class="p-column-title">Date due:</span>
+              {{ income.dateDue | date: "dd/MM/yyyy" }}
+            </td>
+            <td>
+              <span class="p-column-title">Date receipt:</span>
+              {{ income.dateReceipt | date: "dd/MM/yyyy HH:mm" }}
+            </td>
+
+
           </tr>
         </ng-template>
       </p-table>

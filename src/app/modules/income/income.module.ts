@@ -14,10 +14,13 @@ import { TableModule } from 'primeng/table';
 import { ChipModule } from 'primeng/chip';
 import { CalendarModule } from 'primeng/calendar';
 import { InputNumberModule } from 'primeng/inputnumber';
+import { ConfirmPopupModule } from 'primeng/confirmpopup';
 
 import { IncomeRoutingModule } from './income-routing.module';
 import { IncomeListComponent } from './income-list/income-list.component';
 import { IncomeComponent } from './income/income.component';
+import { TooltipModule } from 'primeng/tooltip';
+import { TagModule } from 'primeng/tag';
 
 @NgModule({
   declarations: [IncomeListComponent, IncomeComponent],
@@ -36,7 +39,10 @@ import { IncomeComponent } from './income/income.component';
     HttpClientModule,
     CalendarModule,
     InputNumberModule,
-    SharedModule
+    SharedModule,
+    ConfirmPopupModule,
+    TooltipModule,
+    TagModule,
   ],
 })
 export class IncomeModule {}
