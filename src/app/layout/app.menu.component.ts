@@ -25,7 +25,7 @@ export class AppMenuComponent implements OnInit {
                 items: [
                     { label: 'Income', icon: 'pi pi-fw pi-arrow-up', routerLink: ['/income'] },
                     { label: 'Expense', icon: 'pi pi-fw pi-arrow-down', routerLink: ['/expense'] },
-                    { label: 'Planning', icon: 'pi pi-fw pi-calendar', routerLink: ['/expense'] }
+                    { label: 'Planning', icon: 'pi pi-fw pi-calendar', routerLink: ['/planning'] }
                 ]
             }
         ];

@@ -22,6 +22,14 @@ const routes: Routes = [
           import('./modules/income/income.module').then((m) => m.IncomeModule),
         canActivate: [AuthGuard],
       },
+      {
+        path: 'expense',
+        loadChildren: () =>
+          import('./modules/expense/expense.module').then(
+            (m) => m.ExpenseModule
+          ),
+        canActivate: [AuthGuard],
+      },
     ],
   },
 ];

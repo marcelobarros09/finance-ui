@@ -3,7 +3,7 @@
 <div class="grid">
   <div class="col-12">
     <div class="card p-fluid">
-      <h5>Incomes</h5>
+      <h5>Expenses</h5>
 
       <form autocomplete="off" (ngSubmit)="findByFilter()">
         <p-panel
@@ -90,7 +90,7 @@
       <br />
 
       <p-table
-        [value]="incomes"
+        [value]="expenses"
         [resizableColumns]="true"
         [paginator]="true"
         [rows]="10"
@@ -114,7 +114,7 @@
 
           </tr>
         </ng-template>
-        <ng-template pTemplate="body" let-income>
+        <ng-template pTemplate="body" let-expense>
           <tr>
             <td style="width: 5%">
               <div class="flex">
@@ -122,16 +122,16 @@
                   pButton
                   pRipple
                   pTooltip="Edit"
-                  [routerLink]="['/income', income.id]"
+                  [routerLink]="['/expense', expense.id]"
                   icon="pi pi-pencil"
                   class="p-button-rounded p-button-outlined p-button-secondary mr-2"
                 ></button>
                 <button
                   pButton
                   pRipple
-                  pTooltip="Receive"
-                  *ngIf="income.status === 'OPEN'"
-                  (click)="receive(income.id)"
+                  pTooltip="Pay"
+                  *ngIf="expense.status === 'OPEN'"
+                  (click)="pay(expense.id)"
                   icon="pi pi-dollar"
                   class="p-button-rounded p-button-outlined p-button-secondary mr-2"
                 ></button>
@@ -139,7 +139,7 @@
                   pButton
                   pRipple
                   pTooltip="Delete"
-                  (click)="delete($event, income.id)"
+                  (click)="delete($event, expense.id)"
                   icon="pi pi-trash"
                   class="p-button-rounded p-button-outlined p-button-secondary"
                 ></button>
@@ -149,25 +149,25 @@
               <span class="p-column-title">Status:</span>
               <p-tag
                 [rounded]="true"
-                severity="{{ income.status == 'OPEN' ? 'danger' : 'success' }}"
-                value="{{ income.status }}"
+                severity="{{ expense.status == 'OPEN' ? 'danger' : 'success' }}"
+                value="{{ expense.status }}"
               ></p-tag>
             </td>
             <td>
               <span class="p-column-title">Description:</span>
-              {{ income.description }}
+              {{ expense.description }}
             </td>
             <td>
               <span class="p-column-title">Amount:</span>
-              {{ income.amount | currency }}
+              {{ expense.amount | currency }}
             </td>
             <td>
               <span class="p-column-title">Date due:</span>
-              {{ income.dateDue | date: "dd/MM/yyyy" }}
+              {{ expense.dateDue | date: "dd/MM/yyyy" }}
             </td>
             <td>
-              <span class="p-column-title">Date receipt:</span>
-              {{ income.dateReceipt | date: "dd/MM/yyyy HH:mm" }}
+              <span class="p-column-title">Date payment:</span>
+              {{ expense.datePayment | date: "dd/MM/yyyy HH:mm" }}
             </td>
 
 

@@ -1,0 +1,164 @@
+<div class="grid">
+  <div class="col-12">
+    <div class="card p-fluid">
+      <h5>Expense</h5>
+
+      <br />
+
+      <form #expenseForm="ngForm" autocomplete="off" (ngSubmit)="save()">
+        <div class="p-fluid p-formgrid grid">
+          <div class="field col-12 md:col-6">
+            <label for="description">Description</label>
+            <input
+              pInputText
+              [(ngModel)]="expense.description"
+              required
+              minlength="3"
+              maxlength="100"
+              type="text"
+              name="description"
+              #description="ngModel"
+              class="inputfield w-full"
+            />
+            <app-input-message
+              [control]="description"
+              error="required"
+              text="Description is required"
+            ></app-input-message>
+            <app-input-message
+              [control]="description"
+              error="minlength"
+              text="Description must be at least 3 characters"
+            ></app-input-message>
+            <app-input-message
+              [control]="description"
+              error="maxlength"
+              text="Description can have a maximum of 100 characters"
+            ></app-input-message>
+          </div>
+
+          <div class="field col-12 md:col-6">
+            <label for="status">Status</label>
+            <p-selectButton
+              [(ngModel)]="expense.status"
+              [options]="statusOptions"
+              optionLabel="label"
+              optionValue="value"
+              [disabled]="true"
+              name="status"
+            ></p-selectButton>
+          </div>
+
+          <div class="field col-12 md:col-6">
+            <label for="amount">Amount</label>
+            <p-inputNumber
+              [(ngModel)]="expense.amount"
+              mode="currency"
+              currency="BRL"
+              name="amount"
+              #amount="ngModel"
+              class="inputfield w-full"
+              [required]="true"
+            >
+            </p-inputNumber>
+            <app-input-message
+              [control]="amount"
+              error="required"
+              text="Amount is required"
+            ></app-input-message>
+          </div>
+
+          <div class="field col-12 md:col-6">
+            <label for="dateDue">Date due</label>
+            <p-calendar
+              [(ngModel)]="expense.dateDue"
+              dateFormat="dd/mm/yy"
+              [touchUI]="false"
+              [readonlyInput]="true"
+              name="dateDue"
+              #dateDue="ngModel"
+              [showIcon]="true"
+              [showButtonBar]="true"
+              [required]="true"
+            ></p-calendar>
+            <app-input-message
+              [control]="dateDue"
+              error="required"
+              text="Date due is required"
+            ></app-input-message>
+          </div>
+
+          <div class="field col-12 md:col-6" *ngIf="isPaid()">
+            <label for="datePayment">Date payment</label>
+            <p-calendar
+              [(ngModel)]="expense.datePayment"
+              dateFormat="dd/mm/yy"
+              [showTime]="true"
+              name="datePayment"
+              #datePayment="ngModel"
+              [required]="true"
+              [showIcon]="true"
+              [showButtonBar]="true"
+            ></p-calendar>
+            <app-input-message
+              [control]="datePayment"
+              error="required"
+              text="Date payment is required when expense is received"
+            ></app-input-message>
+          </div>
+
+          <div class="col-offset-6" *ngIf="isPaid()"></div>
+
+          <div class="field col-12 md:col-3">
+            <button
+              pButton
+              pRipple
+              (click)="save()"
+              icon="pi pi-save"
+              type="button"
+              label="Save"
+              class="p-button-rounded p-button-outlined p-button-secondary mr-2 mb-2"
+              [disabled]="!expenseForm.valid"
+            ></button>
+          </div>
+
+          <div class="field col-12 md:col-3" *ngIf="isPayable()">
+            <button
+              pButton
+              pRipple
+              (click)="pay()"
+              icon="pi pi-dollar"
+              type="button"
+              label="Pay"
+              class="p-button-rounded p-button-outlined p-button-secondary mr-2 mb-2"
+            ></button>
+          </div>
+
+          <div class="field col-12 md:col-3" *ngIf="isCancelable()">
+            <button
+              pButton
+              pRipple
+              (click)="cancelPayment()"
+              icon="pi pi-dollar"
+              type="button"
+              label="Cancel payment"
+              class="p-button-rounded p-button-outlined p-button-secondary mr-2 mb-2"
+            ></button>
+          </div>
+
+          <div class="field col-12 md:col-3">
+            <button
+              pButton
+              pRipple
+              [routerLink]="['/expense']"
+              icon="pi pi-times"
+              type="button"
+              label="Close"
+              class="p-button-rounded p-button-outlined p-button-secondary mr-2 mb-2"
+            ></button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
