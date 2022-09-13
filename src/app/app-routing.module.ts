@@ -30,6 +30,14 @@ const routes: Routes = [
           ),
         canActivate: [AuthGuard],
       },
+      {
+        path: 'planning',
+        loadChildren: () =>
+          import('./modules/planning/planning.module').then(
+            (m) => m.PlanningModule
+          ),
+        canActivate: [AuthGuard],
+      },
     ],
   },
 ];

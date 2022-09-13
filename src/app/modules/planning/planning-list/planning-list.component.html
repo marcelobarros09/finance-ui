@@ -1,0 +1,228 @@
+<p-confirmPopup></p-confirmPopup>
+
+<div class="grid">
+  <div class="col-12">
+    <div class="card p-fluid">
+      <h5>Plannings</h5>
+
+      <form autocomplete="off" (ngSubmit)="findByFilter()">
+        <p-panel
+          header="Search engine"
+          [toggleable]="true"
+          iconPos="left"
+          expandIcon="pi pi-angle-right"
+          collapseIcon="pi pi-angle-down"
+          [collapsed]="true"
+        >
+          <div class="p-fluid p-formgrid grid">
+            <div class="field col-12 md:col-6">
+              <label for="description">Description</label>
+              <input
+                pInputText
+                [(ngModel)]="filter.description"
+                type="text"
+                name="description"
+                class="inputfield w-full"
+              />
+            </div>
+
+            <div class="field col-12 md:col-6">
+              <label for="status">Type</label>
+              <p-selectButton
+                [(ngModel)]="filter.type"
+                [options]="typeOptions"
+                [multiple]="true"
+                optionLabel="label"
+                optionValue="value"
+                name="type"
+              ></p-selectButton>
+            </div>
+
+            <div class="field col-12 md:col-6">
+              <label for="startAtStart">Start at start</label>
+              <p-calendar
+                [(ngModel)]="filter.startAtStart"
+                dateFormat="mm/yy"
+                view="month"
+                name="startAtStart"
+                [showIcon]="true"
+                [showButtonBar]="true"
+              ></p-calendar>
+            </div>
+
+            <div class="field col-12 md:col-6">
+              <label for="startAtEnd">Start at end</label>
+              <p-calendar
+                [(ngModel)]="filter.startAtEnd"
+                dateFormat="mm/yy"
+                view="month"
+                name="startAtEnd"
+                [showIcon]="true"
+                [showButtonBar]="true"
+              ></p-calendar>
+            </div>
+
+            <div class="field col-12 md:col-6">
+              <label for="endAtStart">End at start</label>
+              <p-calendar
+                [(ngModel)]="filter.endAtStart"
+                dateFormat="mm/yy"
+                view="month"
+                name="endAtStart"
+                [showIcon]="true"
+                [showButtonBar]="true"
+              ></p-calendar>
+            </div>
+
+            <div class="field col-12 md:col-6">
+              <label for="endAtEnd">End at end</label>
+              <p-calendar
+                [(ngModel)]="filter.endAtEnd"
+                dateFormat="mm/yy"
+                view="month"
+                name="endAtEnd"
+                [showIcon]="true"
+                [showButtonBar]="true"
+              ></p-calendar>
+            </div>
+
+            <div class="field col-12 md:col-6">
+              <label for="dueDay">Due day</label>
+              <input
+                pInputText
+                [(ngModel)]="filter.dueDay"
+                type="number"
+                name="dueDay"
+                class="inputfield w-full"
+              />
+            </div>
+
+            <div class="col-offset-6"></div>
+
+            <div class="field col-12 md:col-3">
+              <button
+                pButton
+                pRipple
+                (click)="findByFilter()"
+                icon="pi pi-search"
+                type="button"
+                label="Search"
+                class="p-button-rounded p-button-outlined p-button-secondary mr-2 mb-2"
+              ></button>
+            </div>
+
+            <div class="field col-12 md:col-3">
+              <button
+                pButton
+                pRipple
+                (click)="cleanFilters()"
+                icon="pi pi-times"
+                type="button"
+                label="Clean"
+                class="p-button-rounded p-button-outlined p-button-secondary mr-2 mb-2"
+              ></button>
+            </div>
+          </div>
+        </p-panel>
+      </form>
+
+      <br />
+
+      <p-table
+        [value]="plannings"
+        [resizableColumns]="true"
+        [paginator]="true"
+        [rows]="10"
+        [showCurrentPageReport]="true"
+        [rowsPerPageOptions]="[10, 25, 50]"
+        [lazy]="true"
+        (onLazyLoad)="onLazyLoad($event)"
+        [loading]="loading"
+        [totalRecords]="totalRecords"
+        styleClass="p-datatable-gridlines p-datatable-striped"
+        responsiveLayout="stack"
+      >
+        <ng-template pTemplate="header">
+          <tr>
+            <th></th>
+            <th pResizableColumn>Type</th>
+            <th pResizableColumn>Description</th>
+            <th pResizableColumn>Amount</th>
+            <th pResizableColumn>Due day</th>
+            <th pResizableColumn>Start at</th>
+            <th pResizableColumn>End at</th>
+
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-planning>
+          <tr>
+            <td style="width: 5%">
+              <div class="flex">
+                <button
+                  pButton
+                  pRipple
+                  pTooltip="Edit"
+                  [routerLink]="['/planning', planning.id]"
+                  icon="pi pi-pencil"
+                  class="p-button-rounded p-button-outlined p-button-secondary mr-2"
+                ></button>
+                <button
+                  pButton
+                  pRipple
+                  pTooltip="Delete"
+                  (click)="delete($event, planning.id)"
+                  icon="pi pi-trash"
+                  class="p-button-rounded p-button-outlined p-button-secondary"
+                ></button>
+              </div>
+            </td>
+            <td style="width: 5%">
+              <span class="p-column-title">Type:</span>
+              <p-tag
+                [rounded]="true"
+                severity="{{ planning.type == 'EXPENSE' ? 'danger' : 'success' }}"
+                value="{{ planning.type }}"
+              ></p-tag>
+            </td>
+            <td>
+              <span class="p-column-title">Description:</span>
+              {{ planning.description }}
+            </td>
+            <td>
+              <span class="p-column-title">Amount:</span>
+              {{ planning.amount | currency }}
+            </td>
+            <td>
+              <span class="p-column-title">Due day:</span>
+              {{ planning.dueDay }}
+            </td>
+            <td>
+              <span class="p-column-title">Start at:</span>
+              {{ planning.startAt | date: "MM/yyyy" }}
+            </td>
+            <td>
+              <span class="p-column-title">End at:</span>
+              {{ planning.endAt | date: "MM/yyyy" }}
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+
+      <br />
+
+      <div class="p-fluid p-formgrid grid">
+        <div class="field col-12 md:col-3">
+          <button
+            pButton
+            pRipple
+            [routerLink]="['new']"
+            icon="pi pi-plus"
+            type="button"
+            label="New"
+            class="p-button-rounded p-button-outlined p-button-secondary mr-2 mb-2"
+          ></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
