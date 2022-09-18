@@ -1,4 +1,8 @@
-import { LazyLoadEvent, ConfirmationService, MessageService } from 'primeng/api';
+import {
+  LazyLoadEvent,
+  ConfirmationService,
+  MessageService,
+} from 'primeng/api';
 import { Planning } from './../planning';
 import { Component, OnInit } from '@angular/core';
 import { PlanningFilter, PlanningService } from '../planning.service';
@@ -24,7 +28,9 @@ export class PlanningListComponent implements OnInit {
     private messageService: MessageService
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.filter.active = true;
+  }
 
   findByFilter(page: number = 0, size: number = 10) {
     this.filter.page = page;

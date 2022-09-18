@@ -3,7 +3,10 @@
 <div class="grid">
   <div class="col-12">
     <div class="card p-fluid">
-      <h5>Plannings</h5>
+      <h5>
+        <i class="pi pi-fw pi-calendar"></i>
+        Plannings
+      </h5>
 
       <form autocomplete="off" (ngSubmit)="findByFilter()">
         <p-panel
@@ -97,7 +100,15 @@
               />
             </div>
 
-            <div class="col-offset-6"></div>
+            <div class="field col-12 md:col-6">
+              <label for="active">Active</label>
+              <br />
+              <p-inputSwitch
+                [(ngModel)]="filter.active"
+                name="active"
+                class="inputfield w-full"
+              ></p-inputSwitch>
+            </div>
 
             <div class="field col-12 md:col-3">
               <button
@@ -151,7 +162,6 @@
             <th pResizableColumn>Due day</th>
             <th pResizableColumn>Start at</th>
             <th pResizableColumn>End at</th>
-
           </tr>
         </ng-template>
         <ng-template pTemplate="body" let-planning>
@@ -180,7 +190,9 @@
               <span class="p-column-title">Type:</span>
               <p-tag
                 [rounded]="true"
-                severity="{{ planning.type == 'EXPENSE' ? 'danger' : 'success' }}"
+                severity="{{
+                  planning.type == 'EXPENSE' ? 'danger' : 'success'
+                }}"
                 value="{{ planning.type }}"
               ></p-tag>
             </td>

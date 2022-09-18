@@ -3,7 +3,10 @@
 <div class="grid">
   <div class="col-12">
     <div class="card p-fluid">
-      <h5>Incomes</h5>
+      <h5>
+        <i class="pi pi-fw pi-arrow-up" style="color: #689f38"></i>
+        Incomes
+      </h5>
 
       <form autocomplete="off" (ngSubmit)="findByFilter()">
         <p-panel
@@ -111,7 +114,6 @@
             <th pResizableColumn>Amount</th>
             <th pResizableColumn>Date due</th>
             <th pResizableColumn>Date receipt</th>
-
           </tr>
         </ng-template>
         <ng-template pTemplate="body" let-income>
@@ -169,8 +171,6 @@
               <span class="p-column-title">Date receipt:</span>
               {{ income.dateReceipt | date: "dd/MM/yyyy HH:mm" }}
             </td>
-
-
           </tr>
         </ng-template>
       </p-table>

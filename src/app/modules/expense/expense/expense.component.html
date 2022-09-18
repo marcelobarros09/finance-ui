@@ -1,7 +1,10 @@
 <div class="grid">
   <div class="col-12">
     <div class="card p-fluid">
-      <h5>Expense</h5>
+      <h5>
+        <i class="pi pi-fw pi-arrow-down" style="color: #d32f2f"></i>
+        Expense
+      </h5>
 
       <br />
 
@@ -21,17 +24,17 @@
               class="inputfield w-full"
             />
             <app-input-message
-              [control]="description"
+              [control]="description.control"
               error="required"
               text="Description is required"
             ></app-input-message>
             <app-input-message
-              [control]="description"
+              [control]="description.control"
               error="minlength"
               text="Description must be at least 3 characters"
             ></app-input-message>
             <app-input-message
-              [control]="description"
+              [control]="description.control"
               error="maxlength"
               text="Description can have a maximum of 100 characters"
             ></app-input-message>
@@ -62,7 +65,7 @@
             >
             </p-inputNumber>
             <app-input-message
-              [control]="amount"
+              [control]="amount.control"
               error="required"
               text="Amount is required"
             ></app-input-message>
@@ -82,7 +85,7 @@
               [required]="true"
             ></p-calendar>
             <app-input-message
-              [control]="dateDue"
+              [control]="dateDue.control"
               error="required"
               text="Date due is required"
             ></app-input-message>
@@ -101,7 +104,7 @@
               [showButtonBar]="true"
             ></p-calendar>
             <app-input-message
-              [control]="datePayment"
+              [control]="datePayment.control"
               error="required"
               text="Date payment is required when expense is received"
             ></app-input-message>

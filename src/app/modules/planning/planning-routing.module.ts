@@ -1,3 +1,4 @@
+import { PlanningComponent } from './planning/planning.component';
 import { PlanningListComponent } from './planning-list/planning-list.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -5,21 +6,20 @@ import { RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    component: PlanningListComponent
+    component: PlanningListComponent,
   },
-  /*{
+  {
     path: 'new',
-    component: PlanningComponent
+    component: PlanningComponent,
   },
   {
     path: ':id',
-    component: PlanningComponent
-  }*/
+    component: PlanningComponent,
+  },
 ];
-
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class PlanningRoutingModule { }
+export class PlanningRoutingModule {}

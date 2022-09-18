@@ -25,6 +25,17 @@ export interface PlanningListResponse {
   size: 20;
 }
 
+export class PlanningRequest {
+  id?: number;
+  description?: string;
+  amount?: number;
+  dueDay?: number;
+  type?: string;
+  active?: boolean;
+  startAt?: string;
+  endAt?: string;
+}
+
 @Injectable({
   providedIn: 'root',
 })
@@ -39,6 +50,7 @@ export class PlanningService {
       .set('page', filter.page!)
       .set('size', filter.size!)
       .set('sort', 'description,asc')
+      .set('active', filter.active!);
 
     if (filter.description) {
       params = params.set('description', filter.description);
@@ -90,11 +102,17 @@ export class PlanningService {
   }
 
   create(planning: Planning): Observable<Planning> {
-    return this.http.post<Planning>(`${this.baseUrl}`, planning);
+    return this.http.post<Planning>(
+      `${this.baseUrl}`,
+      this.toRequest(planning)
+    );
   }
 
   update(id: number, planning: Planning): Observable<Planning> {
-    return this.http.put<Planning>(`${this.baseUrl}/${id}`, planning);
+    return this.http.put<Planning>(
+      `${this.baseUrl}/${id}`,
+      this.toRequest(planning)
+    );
   }
 
   delete(id: number): Observable<void> {
@@ -107,5 +125,23 @@ export class PlanningService {
 
   inactivate(id: number): Observable<void> {
     return this.http.put<void>(`${this.baseUrl}/${id}/inactive`, {});
+  }
+
+  private toRequest(planning: Planning): PlanningRequest {
+    let request = new PlanningRequest();
+    request.active = planning.active;
+    request.amount = planning.amount;
+    request.description = planning.description;
+    request.dueDay = planning.dueDay;
+    request.type = planning.type;
+    request.startAt = this.datePipe.transform(
+      planning.startAt,
+      this.monthAndYearFormat
+    )!;
+    request.endAt = this.datePipe.transform(
+      planning.endAt,
+      this.monthAndYearFormat
+    )!;
+    return request;
   }
 }

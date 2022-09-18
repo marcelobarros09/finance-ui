@@ -1,43 +1,10 @@
 <div class="grid">
   <div class="col-12">
     <div class="card p-fluid">
-      <h5>Income</h5>
-      <!--<p-toolbar>
-        <div class="p-toolbar-group-left">
-          <p-button
-            label="Save"
-            icon="pi pi-save"
-            styleClass="p-button-text p-button-secondary"
-          ></p-button>
-          <p-button
-            *ngIf="isReceivable()"
-            label="Receive"
-            icon="pi pi-dollar"
-            styleClass="p-button-text p-button-secondary"
-          ></p-button>
-          <p-button
-            *ngIf="isCancelable()"
-            label="Cancel receipt"
-            icon="pi pi-dollar"
-            styleClass="p-button-text p-button-secondary"
-          ></p-button>
-          <p-button
-            *ngIf="!editing"
-            label="Clean"
-            icon="pi pi-times"
-            styleClass="p-button-text p-button-secondary"
-          ></p-button>
-
-          <span>|</span>
-
-          <p-button
-            [routerLink]="['/income']"
-            label="Back"
-            icon="pi pi-replay"
-            styleClass="p-button-text p-button-secondary"
-          ></p-button>
-        </div>
-      </p-toolbar> -->
+      <h5>
+        <i class="pi pi-fw pi-arrow-up" style="color: #689f38"></i>
+        Income
+      </h5>
 
       <br />
 
@@ -57,17 +24,17 @@
               class="inputfield w-full"
             />
             <app-input-message
-              [control]="description"
+              [control]="description.control"
               error="required"
               text="Description is required"
             ></app-input-message>
             <app-input-message
-              [control]="description"
+              [control]="description.control"
               error="minlength"
               text="Description must be at least 3 characters"
             ></app-input-message>
             <app-input-message
-              [control]="description"
+              [control]="description.control"
               error="maxlength"
               text="Description can have a maximum of 100 characters"
             ></app-input-message>
@@ -98,7 +65,7 @@
             >
             </p-inputNumber>
             <app-input-message
-              [control]="amount"
+              [control]="amount.control"
               error="required"
               text="Amount is required"
             ></app-input-message>
@@ -118,7 +85,7 @@
               [required]="true"
             ></p-calendar>
             <app-input-message
-              [control]="dateDue"
+              [control]="dateDue.control"
               error="required"
               text="Date due is required"
             ></app-input-message>
@@ -137,7 +104,7 @@
               [showButtonBar]="true"
             ></p-calendar>
             <app-input-message
-              [control]="dateReceipt"
+              [control]="dateReceipt.control"
               error="required"
               text="Date receipt is required when income is received"
             ></app-input-message>

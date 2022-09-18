@@ -1,3 +1,4 @@
+import { FormBuilder } from '@angular/forms';
 import { environment } from './../environments/environment';
 import { MessageService, ConfirmationService } from 'primeng/api';
 import { AppLayoutModule } from './layout/app.layout.module';
@@ -62,6 +63,7 @@ registerLocaleData(localePt, 'pt-BR');
     KeycloakService,
     MessageService,
     ConfirmationService,
+    FormBuilder,
   ],
   bootstrap: [AppComponent],
 })
