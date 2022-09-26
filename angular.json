@@ -30,7 +30,9 @@
               "src/styles.css",
               "src/assets/layout/styles/layout/layout.scss"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/chart.js/dist/chart.js"
+            ]
           },
           "configurations": {
             "production": {

@@ -1,7 +1,7 @@
 export const environment = {
   production: false,
-  apiUrl: 'http://192.168.10.10:8080',
-  keycloakUrl: 'http://192.168.10.10:8081',
+  apiUrl: 'http://localhost:8080',
+  keycloakUrl: 'http://localhost:8081',
   keycloakRealm: 'Finance',
   keycloakClientId: 'finance-ui',
 };
