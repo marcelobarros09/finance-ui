@@ -32,6 +32,7 @@ export class PlanningComponent implements OnInit {
     this.id = this.activatedRoute.snapshot.params['id'];
 
     if (this.id) {
+      this.editing = true;
       this.findById(this.id);
     }
   }

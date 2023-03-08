@@ -1,3 +1,4 @@
+import { ErrorHandlerService } from './../../core/error-handler.service';
 import { MessageService } from 'primeng/api';
 import { ExpenseService } from './../expense.service';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-expense',
   templateUrl: './expense.component.html',
-  styleUrls: ['./expense.component.css']
+  styleUrls: ['./expense.component.css'],
 })
 export class ExpenseComponent implements OnInit {
   statusOptions = [
@@ -22,7 +23,8 @@ export class ExpenseComponent implements OnInit {
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private expenseService: ExpenseService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private errorHandlerService: ErrorHandlerService
   ) {}
 
   ngOnInit(): void {
@@ -42,7 +44,7 @@ export class ExpenseComponent implements OnInit {
         this.expense = result;
         this.convertDates(this.expense);
       },
-      error: (error) => this.onError(error),
+      error: (error) => this.errorHandlerService.handle(error),
     });
   }
 
@@ -65,7 +67,7 @@ export class ExpenseComponent implements OnInit {
           detail: 'Saved successfully',
         });
       },
-      error: (error) => this.onError(error),
+      error: (error) => this.errorHandlerService.handle(error),
     });
   }
 
@@ -79,7 +81,7 @@ export class ExpenseComponent implements OnInit {
         });
         this.router.navigate(['/expense', result.id]);
       },
-      error: (error) => this.onError(error),
+      error: (error) => this.errorHandlerService.handle(error),
     });
   }
 
@@ -93,7 +95,7 @@ export class ExpenseComponent implements OnInit {
           detail: 'Paid successfully',
         });
       },
-      error: (error) => this.onError(error),
+      error: (error) => this.errorHandlerService.handle(error),
     });
   }
 
@@ -107,7 +109,7 @@ export class ExpenseComponent implements OnInit {
           detail: 'Payment canceled successfully',
         });
       },
-      error: (error) => this.onError(error),
+      error: (error) => this.errorHandlerService.handle(error),
     });
   }
 
@@ -123,11 +125,6 @@ export class ExpenseComponent implements OnInit {
     return this.expense?.status === 'PAID';
   }
 
-  private onError(error: any) {
-    console.error(error);
-    alert(JSON.stringify(error));
-  }
-
   private convertDates(expense: Expense) {
     expense.dateDue = this.parseToDate(expense.dateDue!);
 
@@ -137,9 +134,8 @@ export class ExpenseComponent implements OnInit {
   }
 
   private parseToDate(dateString: any) {
-    var dateParts = dateString.split("-");
+    var dateParts = dateString.split('-');
     var date = new Date(dateParts[0], dateParts[1] - 1, dateParts[2]);
     return date;
   }
-
 }
