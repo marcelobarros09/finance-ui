@@ -49,8 +49,11 @@ export class PlanningService {
     let params = new HttpParams()
       .set('page', filter.page!)
       .set('size', filter.size!)
-      .set('sort', 'description,asc')
-      .set('active', filter.active!);
+      .set('sort', 'description,asc');
+
+    if(filter.active != null) {
+      params = params.set('active', filter.active);
+    }
 
     if (filter.description) {
       params = params.set('description', filter.description);

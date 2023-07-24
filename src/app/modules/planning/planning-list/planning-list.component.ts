@@ -21,6 +21,11 @@ export class PlanningListComponent implements OnInit {
   plannings: Planning[] = [];
   totalRecords: number = 0;
   loading: boolean = false;
+  activeOptions = [
+    { label: 'All', value: null },
+    { label: 'Yes', value: true },
+    { label: 'No', value: false },
+  ]
 
   constructor(
     private planningService: PlanningService,

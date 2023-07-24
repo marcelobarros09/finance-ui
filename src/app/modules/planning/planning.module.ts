@@ -17,6 +17,7 @@ import { InputSwitchModule } from 'primeng/inputswitch';
 import { TemplateModule } from './../template/template.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { DropdownModule } from 'primeng/dropdown';
 
 import { PlanningRoutingModule } from './planning-routing.module';
 import { PlanningListComponent } from './planning-list/planning-list.component';
@@ -45,6 +46,7 @@ import { PlanningComponent } from './planning/planning.component';
     TagModule,
     InputSwitchModule,
     ReactiveFormsModule,
+    DropdownModule 
   ],
 })
 export class PlanningModule {}
