@@ -5,7 +5,6 @@ import { SharedModule } from './../shared/shared.module';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { CalendarModule } from 'primeng/calendar';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ChipModule } from 'primeng/chip';
 import { TableModule } from 'primeng/table';
 import { SelectButtonModule } from 'primeng/selectbutton';
@@ -22,6 +21,7 @@ import { DropdownModule } from 'primeng/dropdown';
 import { PlanningRoutingModule } from './planning-routing.module';
 import { PlanningListComponent } from './planning-list/planning-list.component';
 import { PlanningComponent } from './planning/planning.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [PlanningListComponent, PlanningComponent],
@@ -36,7 +36,6 @@ import { PlanningComponent } from './planning/planning.component';
     SelectButtonModule,
     TableModule,
     ChipModule,
-    FormsModule,
     HttpClientModule,
     CalendarModule,
     InputNumberModule,
@@ -45,8 +44,9 @@ import { PlanningComponent } from './planning/planning.component';
     TooltipModule,
     TagModule,
     InputSwitchModule,
-    ReactiveFormsModule,
-    DropdownModule 
+    DropdownModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
 })
 export class PlanningModule {}

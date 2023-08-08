@@ -1,6 +1,5 @@
 import { SharedModule } from './../shared/shared.module';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -20,6 +19,7 @@ import { TagModule } from 'primeng/tag';
 import { ExpenseRoutingModule } from './expense-routing.module';
 import { ExpenseListComponent } from './expense-list/expense-list.component';
 import { ExpenseComponent } from './expense/expense.component';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -37,7 +37,6 @@ import { ExpenseComponent } from './expense/expense.component';
     SelectButtonModule,
     TableModule,
     ChipModule,
-    FormsModule,
     HttpClientModule,
     CalendarModule,
     InputNumberModule,
@@ -45,6 +44,7 @@ import { ExpenseComponent } from './expense/expense.component';
     ConfirmPopupModule,
     TooltipModule,
     TagModule,
+    FormsModule
   ]
 })
 export class ExpenseModule { }

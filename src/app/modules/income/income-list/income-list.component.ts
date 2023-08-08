@@ -2,6 +2,7 @@ import { ConfirmationService, LazyLoadEvent, MessageService } from 'primeng/api'
 import { IncomeFilter, IncomeService } from './../income.service';
 import { Income } from './../income';
 import { Component, OnInit } from '@angular/core';
+import { TableLazyLoadEvent } from 'primeng/table';
 
 @Component({
   selector: 'app-income-list',
@@ -52,9 +53,9 @@ export class IncomeListComponent implements OnInit {
     );
   }
 
-  onLazyLoad(event: LazyLoadEvent) {
+  onLazyLoad(event: TableLazyLoadEvent) {
     const page = event!.first! / event!.rows!;
-    const size = event.rows;
+    const size = event.rows!;
     this.findByFilter(page, size);
   }
 

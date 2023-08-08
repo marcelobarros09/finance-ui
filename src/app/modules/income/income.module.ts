@@ -2,7 +2,6 @@ import { SharedModule } from './../shared/shared.module';
 import { TemplateModule } from './../template/template.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 import { ToolbarModule } from 'primeng/toolbar';
@@ -21,6 +20,7 @@ import { IncomeListComponent } from './income-list/income-list.component';
 import { IncomeComponent } from './income/income.component';
 import { TooltipModule } from 'primeng/tooltip';
 import { TagModule } from 'primeng/tag';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [IncomeListComponent, IncomeComponent],
@@ -34,8 +34,8 @@ import { TagModule } from 'primeng/tag';
     InputTextModule,
     SelectButtonModule,
     TableModule,
-    ChipModule,
     FormsModule,
+    ChipModule,
     HttpClientModule,
     CalendarModule,
     InputNumberModule,

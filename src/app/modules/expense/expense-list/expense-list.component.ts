@@ -3,6 +3,7 @@ import { IncomeService } from './../../income/income.service';
 import { ExpenseFilter, ExpenseService } from './../expense.service';
 import { Expense } from './../expense';
 import { Component, OnInit } from '@angular/core';
+import { TableLazyLoadEvent } from 'primeng/table';
 
 @Component({
   selector: 'app-expense-list',
@@ -53,9 +54,9 @@ export class ExpenseListComponent implements OnInit {
     );
   }
 
-  onLazyLoad(event: LazyLoadEvent) {
+  onLazyLoad(event: TableLazyLoadEvent) {
     const page = event!.first! / event!.rows!;
-    const size = event.rows;
+    const size = event.rows!;
     this.findByFilter(page, size);
   }
 

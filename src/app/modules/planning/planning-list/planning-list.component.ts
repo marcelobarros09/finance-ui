@@ -6,6 +6,7 @@ import {
 import { Planning } from './../planning';
 import { Component, OnInit } from '@angular/core';
 import { PlanningFilter, PlanningService } from '../planning.service';
+import { TableLazyLoadEvent } from 'primeng/table';
 
 @Component({
   selector: 'app-planning-list',
@@ -55,9 +56,9 @@ export class PlanningListComponent implements OnInit {
     );
   }
 
-  onLazyLoad(event: LazyLoadEvent) {
+  onLazyLoad(event: TableLazyLoadEvent) {
     const page = event!.first! / event!.rows!;
-    const size = event.rows;
+    const size = event.rows!;
     this.findByFilter(page, size);
   }
 
