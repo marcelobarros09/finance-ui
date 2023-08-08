@@ -12,9 +12,9 @@
         <p-panel
           header="Search engine"
           [toggleable]="true"
-          iconPos="left"
-          expandIcon="pi pi-angle-right"
-          collapseIcon="pi pi-angle-down"
+          iconPos="start"
+          expandIcon="pi pi-angle-down"
+          collapseIcon="pi pi-angle-right"
           [collapsed]="true"
         >
           <div class="p-fluid p-formgrid grid">
@@ -165,11 +165,11 @@
             </td>
             <td>
               <span class="p-column-title">Date due:</span>
-              {{ expense.dateDue | date: "dd/MM/yyyy" }}
+              {{ expense.dateDue | date : "dd/MM/yyyy" }}
             </td>
             <td>
               <span class="p-column-title">Date payment:</span>
-              {{ expense.datePayment | date: "dd/MM/yyyy HH:mm" }}
+              {{ expense.datePayment | date : "dd/MM/yyyy HH:mm" }}
             </td>
           </tr>
         </ng-template>
