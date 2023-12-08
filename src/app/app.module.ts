@@ -13,27 +13,11 @@ import {
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import localePt from '@angular/common/locales/pt';
-import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
 import { ToastModule } from 'primeng/toast';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { TemplateModule } from './modules/template/template.module';
-
-function initializeKeycloak(keycloak: KeycloakService) {
-  return () =>
-    keycloak.init({
-      config: {
-        url: environment.keycloakUrl,
-        realm: environment.keycloakRealm,
-        clientId: environment.keycloakClientId,
-      },
-      initOptions: {
-        checkLoginIframe: true,
-        checkLoginIframeInterval: 25,
-      },
-    });
-}
 
 registerLocaleData(localePt, 'pt-BR');
 
@@ -47,20 +31,12 @@ registerLocaleData(localePt, 'pt-BR');
     TemplateModule,
     HttpClientModule,
     CommonModule,
-    KeycloakAngularModule,
     ToastModule,
   ],
   providers: [
-    {
-      provide: APP_INITIALIZER,
-      useFactory: initializeKeycloak,
-      multi: true,
-      deps: [KeycloakService],
-    },
     { provide: DEFAULT_CURRENCY_CODE, useValue: 'BRL' },
     { provide: LOCALE_ID, useValue: 'pt-BR' },
     DatePipe,
-    KeycloakService,
     MessageService,
     ConfirmationService,
     FormBuilder,

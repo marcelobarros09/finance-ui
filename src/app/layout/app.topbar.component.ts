@@ -1,8 +1,8 @@
-import { KeycloakService } from 'keycloak-angular';
 import { Router } from '@angular/router';
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { MenuItem } from 'primeng/api';
 import { LayoutService } from './service/app.layout.service';
+import { AuthService } from '../modules/auth/auth.service';
 
 @Component({
   selector: 'app-topbar',
@@ -19,12 +19,12 @@ export class AppTopBarComponent {
 
   constructor(
     public layoutService: LayoutService,
-    private keycloakService: KeycloakService,
-    private router: Router
+    private router: Router,
+    private authService: AuthService
   ) {}
 
   logout() {
-    this.keycloakService.logout();
+    this.authService.logout();
     this.router.navigate(['/']);
   }
 }
