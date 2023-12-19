@@ -10,8 +10,19 @@ export class ErrorHandlerService {
 
   handle(error: any) {
     if (error instanceof HttpErrorResponse) {
-      error.error.messages.array.forEach((message: any) => {
-        console.error(message);
+      error.error.messages.forEach((message: any) => {
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Error',
+          detail: message,
+        });
+      });
+    } else {
+      console.error('An error occurred', error);
+      this.messageService.add({
+        severity: 'error',
+        summary: 'Error',
+        detail: 'An error occurred. Try again later.',
       });
     }
   }

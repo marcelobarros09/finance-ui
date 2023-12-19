@@ -25,6 +25,6 @@ export class AppTopBarComponent {
 
   logout() {
     this.authService.logout();
-    this.router.navigate(['/']);
+    window.location.reload();
   }
 }
