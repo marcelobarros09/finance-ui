@@ -7,4 +7,5 @@ export class Planning {
   active?: boolean;
   startAt?: Date;
   endAt?: Date;
+  showInstallmentsInBillName?: boolean;
 }

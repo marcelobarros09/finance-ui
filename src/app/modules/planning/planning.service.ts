@@ -34,6 +34,7 @@ export class PlanningRequest {
   active?: boolean;
   startAt?: string;
   endAt?: string;
+  showInstallmentsInBillName?: boolean;
 }
 
 @Injectable({
@@ -51,7 +52,7 @@ export class PlanningService {
       .set('size', filter.size!)
       .set('sort', 'description,asc');
 
-    if(filter.active != null) {
+    if (filter.active != null) {
       params = params.set('active', filter.active);
     }
 
@@ -145,6 +146,7 @@ export class PlanningService {
       planning.endAt,
       this.monthAndYearFormat
     )!;
+    request.showInstallmentsInBillName = planning.showInstallmentsInBillName;
     return request;
   }
 }

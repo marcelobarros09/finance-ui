@@ -96,6 +96,7 @@ export class PlanningComponent implements OnInit {
       startAt: ['', Validators.required],
       endAt: ['', Validators.required],
       active: [true],
+      showInstallmentsInBillName: [false],
     });
   }
 
