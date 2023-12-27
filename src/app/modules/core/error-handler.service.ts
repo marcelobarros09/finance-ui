@@ -10,6 +10,11 @@ export class ErrorHandlerService {
 
   handle(error: any) {
     if (error instanceof HttpErrorResponse) {
+      if (error.status == 401 || error.status == 403) {
+        window.localStorage.clear();
+        window.location.href = '/';
+      }
+
       error.error.messages.forEach((message: any) => {
         this.messageService.add({
           severity: 'error',

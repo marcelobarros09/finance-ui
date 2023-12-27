@@ -1,8 +1,13 @@
-import { ConfirmationService, LazyLoadEvent, MessageService } from 'primeng/api';
+import {
+  ConfirmationService,
+  LazyLoadEvent,
+  MessageService,
+} from 'primeng/api';
 import { IncomeFilter, IncomeService } from './../income.service';
 import { Income } from './../income';
 import { Component, OnInit } from '@angular/core';
 import { TableLazyLoadEvent } from 'primeng/table';
+import { ErrorHandlerService } from '../../core/error-handler.service';
 
 @Component({
   selector: 'app-income-list',
@@ -22,7 +27,8 @@ export class IncomeListComponent implements OnInit {
   constructor(
     private incomeService: IncomeService,
     private confirmationService: ConfirmationService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private errorHandlingService: ErrorHandlerService
   ) {}
 
   ngOnInit(): void {
@@ -47,8 +53,7 @@ export class IncomeListComponent implements OnInit {
       },
       (error) => {
         this.loading = false;
-        console.log(error);
-        alert(JSON.stringify(error));
+        this.onError(error);
       }
     );
   }
@@ -100,7 +105,6 @@ export class IncomeListComponent implements OnInit {
   }
 
   private onError(error: any) {
-    console.error(error);
-    alert(JSON.stringify(error));
+    this.errorHandlingService.handle(error);
   }
 }

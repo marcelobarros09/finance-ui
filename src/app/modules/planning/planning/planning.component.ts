@@ -4,6 +4,7 @@ import { PlanningService } from './../planning.service';
 import { Component, OnInit } from '@angular/core';
 import { Planning } from '../planning';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ErrorHandlerService } from '../../core/error-handler.service';
 
 @Component({
   selector: 'app-planning',
@@ -24,7 +25,8 @@ export class PlanningComponent implements OnInit {
     private planningService: PlanningService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private errorHandlingService: ErrorHandlerService
   ) {}
 
   ngOnInit(): void {
@@ -111,8 +113,7 @@ export class PlanningComponent implements OnInit {
   }
 
   private onError(error: any) {
-    console.error(error);
-    alert(JSON.stringify(error));
+    this.errorHandlingService.handle(error);
   }
 
   private convertDates(planning: Planning) {

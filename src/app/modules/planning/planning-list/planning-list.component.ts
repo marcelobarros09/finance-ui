@@ -7,6 +7,7 @@ import { Planning } from './../planning';
 import { Component, OnInit } from '@angular/core';
 import { PlanningFilter, PlanningService } from '../planning.service';
 import { TableLazyLoadEvent } from 'primeng/table';
+import { ErrorHandlerService } from '../../core/error-handler.service';
 
 @Component({
   selector: 'app-planning-list',
@@ -26,12 +27,13 @@ export class PlanningListComponent implements OnInit {
     { label: 'All', value: null },
     { label: 'Yes', value: true },
     { label: 'No', value: false },
-  ]
+  ];
 
   constructor(
     private planningService: PlanningService,
     private confirmationService: ConfirmationService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private errorHandlingService: ErrorHandlerService
   ) {}
 
   ngOnInit(): void {
@@ -50,8 +52,7 @@ export class PlanningListComponent implements OnInit {
       },
       (error) => {
         this.loading = false;
-        console.log(error);
-        alert(JSON.stringify(error));
+        this.onError(error);
       }
     );
   }
@@ -89,7 +90,6 @@ export class PlanningListComponent implements OnInit {
   }
 
   private onError(error: any) {
-    console.error(error);
-    alert(JSON.stringify(error));
+    this.errorHandlingService.handle(error);
   }
 }

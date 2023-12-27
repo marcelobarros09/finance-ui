@@ -1,3 +1,4 @@
+import { ErrorHandlerService } from '../../core/error-handler.service';
 import { Balance } from './../balance';
 import { DashboardService } from './../dashboard.service';
 import { PeriodOverview } from './PeriodOverview';
@@ -17,7 +18,8 @@ export class DashboardComponent implements OnInit {
 
   constructor(
     private datePipe: DatePipe,
-    private dashboardService: DashboardService
+    private dashboardService: DashboardService,
+    private errorHandlingService: ErrorHandlerService
   ) {}
 
   ngOnInit(): void {
@@ -92,7 +94,6 @@ export class DashboardComponent implements OnInit {
   }
 
   private onError(error: any) {
-    console.error(error);
-    alert(JSON.stringify(error));
+    this.errorHandlingService.handle(error);
   }
 }

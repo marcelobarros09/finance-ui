@@ -4,6 +4,7 @@ import { Income } from './../income';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
+import { ErrorHandlerService } from '../../core/error-handler.service';
 
 @Component({
   selector: 'app-income',
@@ -23,7 +24,8 @@ export class IncomeComponent implements OnInit {
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private incomeService: IncomeService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private errorHandlingService: ErrorHandlerService
   ) {}
 
   ngOnInit(): void {
@@ -125,8 +127,7 @@ export class IncomeComponent implements OnInit {
   }
 
   private onError(error: any) {
-    console.error(error);
-    alert(JSON.stringify(error));
+    this.errorHandlingService.handle(error);
   }
 
   private convertDates(income: Income) {
@@ -138,7 +139,7 @@ export class IncomeComponent implements OnInit {
   }
 
   private parseToDate(dateString: any) {
-    var dateParts = dateString.split("-");
+    var dateParts = dateString.split('-');
     var date = new Date(dateParts[0], dateParts[1] - 1, dateParts[2]);
     return date;
   }
