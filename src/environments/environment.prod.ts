@@ -1,7 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://fintrack-app.azurewebsites.net',
-  keycloakUrl: 'https://fintrack-auth.azurewebsites.net',
-  keycloakRealm: 'fintrack',
-  keycloakClientId: 'fintrack-ui',
+  apiUrl: 'https://fintrack-app-81971c4d11e5.herokuapp.com',
 };
