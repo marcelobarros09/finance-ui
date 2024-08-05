@@ -20,6 +20,7 @@ export class ErrorHandlerService {
           severity: 'error',
           summary: 'Error',
           detail: message,
+          life: 5000,
         });
       });
     } else {
@@ -28,6 +29,7 @@ export class ErrorHandlerService {
         severity: 'error',
         summary: 'Error',
         detail: 'An error occurred. Try again later.',
+        life: 5000,
       });
     }
   }
