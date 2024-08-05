@@ -5,6 +5,10 @@ import { Component, OnInit } from '@angular/core';
 import { Planning } from '../planning';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ErrorHandlerService } from '../../core/error-handler.service';
+import {
+  CategoryResponse,
+  CategoryService,
+} from '../../category/category.service';
 
 @Component({
   selector: 'app-planning',
@@ -19,6 +23,7 @@ export class PlanningComponent implements OnInit {
   planningForm!: FormGroup;
   private id?: number;
   editing = false;
+  categories: CategoryResponse[] = [];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -26,7 +31,8 @@ export class PlanningComponent implements OnInit {
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private messageService: MessageService,
-    private errorHandlingService: ErrorHandlerService
+    private errorHandlingService: ErrorHandlerService,
+    private categoryService: CategoryService
   ) {}
 
   ngOnInit(): void {
@@ -99,6 +105,12 @@ export class PlanningComponent implements OnInit {
       endAt: ['', Validators.required],
       active: [true],
       showInstallmentsInBillName: [false],
+      categoryId: [{ value: '', disabled: true }],
+    });
+
+    this.planningForm.get('type')?.valueChanges.subscribe((value) => {
+      this.loadCategories(this.planningForm.get('type')?.value);
+      this.planningForm.get('categoryId')?.enable();
     });
   }
 
@@ -125,5 +137,16 @@ export class PlanningComponent implements OnInit {
     var dateParts = dateString.split('-');
     var date = new Date(dateParts[0], dateParts[1] - 1);
     return date;
+  }
+
+  loadCategories(type: string) {
+    if (type) {
+      this.categoryService.findByType(type).subscribe({
+        next: (result) => {
+          this.categories = result;
+        },
+        error: (error) => this.onError(error),
+      });
+    }
   }
 }

@@ -23,6 +23,7 @@ export interface PlanningListResponse {
   totalPages: number;
   totalElements: number;
   size: 20;
+  page: any;
 }
 
 export class PlanningRequest {
@@ -35,6 +36,7 @@ export class PlanningRequest {
   startAt?: string;
   endAt?: string;
   showInstallmentsInBillName?: boolean;
+  categoryId?: number;
 }
 
 @Injectable({
@@ -147,6 +149,7 @@ export class PlanningService {
       this.monthAndYearFormat
     )!;
     request.showInstallmentsInBillName = planning.showInstallmentsInBillName;
+    request.categoryId = planning.categoryId;
     return request;
   }
 }

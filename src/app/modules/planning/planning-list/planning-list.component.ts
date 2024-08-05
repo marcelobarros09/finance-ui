@@ -46,8 +46,9 @@ export class PlanningListComponent implements OnInit {
     this.loading = true;
     this.planningService.findByFilter(this.filter).subscribe(
       (result) => {
+        console.log(result);
         this.plannings = result.content;
-        this.totalRecords = result.totalElements;
+        this.totalRecords = result.page.totalElements;
         this.loading = false;
       },
       (error) => {

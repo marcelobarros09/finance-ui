@@ -8,4 +8,5 @@ export class Planning {
   startAt?: Date;
   endAt?: Date;
   showInstallmentsInBillName?: boolean;
+  categoryId?: number;
 }

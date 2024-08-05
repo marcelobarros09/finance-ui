@@ -49,7 +49,7 @@ export class ExpenseListComponent implements OnInit {
     this.expenseService.findByFilter(this.filter).subscribe(
       (result) => {
         this.expenses = result.content;
-        this.totalRecords = result.totalElements;
+        this.totalRecords = result.page.totalElements;
         this.loading = false;
       },
       (error) => {

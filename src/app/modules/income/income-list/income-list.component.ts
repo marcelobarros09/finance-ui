@@ -48,7 +48,7 @@ export class IncomeListComponent implements OnInit {
     this.incomeService.findByFilter(this.filter).subscribe(
       (result) => {
         this.incomes = result.content;
-        this.totalRecords = result.totalElements;
+        this.totalRecords = result.page.totalElements;
         this.loading = false;
       },
       (error) => {

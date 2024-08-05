@@ -36,7 +36,7 @@
             ></app-input-message>
           </div>
 
-          <div class="field col-12 md:col-4">
+          <div class="field col-12 md:col-2">
             <label for="amount">Amount</label>
             <p-inputNumber
               formControlName="amount"
@@ -58,7 +58,7 @@
             ></app-input-message>
           </div>
 
-          <div class="field col-12 md:col-4">
+          <div class="field col-12 md:col-2">
             <label for="type">Type</label>
             <p-selectButton
               formControlName="type"
@@ -73,6 +73,21 @@
               error="required"
               text="Type is required"
             ></app-input-message>
+          </div>
+
+          <div class="field col-12 md:col-4">
+            <label for="category">Category</label>
+            <p-dropdown
+              [options]="categories"
+              formControlName="categoryId"
+              optionLabel="name"
+              optionValue="id"
+              name="active"
+              placeholder="Select a Category"
+              [filter]="true"
+              filterBy="name"
+              [showClear]="true"
+            ></p-dropdown>
           </div>
 
           <div class="field col-12 md:col-4">

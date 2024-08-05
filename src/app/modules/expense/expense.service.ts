@@ -19,8 +19,8 @@ export interface ExpenseListResponse {
   content: Expense[];
   pageable: any;
   totalPages: number;
-  totalElements: number;
   size: 20;
+  page: any;
 }
 
 @Injectable({
@@ -36,7 +36,7 @@ export class ExpenseService {
     let params = new HttpParams()
       .set('page', filter.page!)
       .set('size', filter.size!)
-      .set('sort', 'description,asc')
+      .set('sort', 'description,asc');
 
     if (filter.description) {
       params = params.set('description', filter.description);
