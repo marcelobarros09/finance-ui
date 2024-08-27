@@ -21,6 +21,7 @@ import { IncomeComponent } from './income/income.component';
 import { TooltipModule } from 'primeng/tooltip';
 import { TagModule } from 'primeng/tag';
 import { FormsModule } from '@angular/forms';
+import { DropdownModule } from 'primeng/dropdown';
 
 @NgModule({
   declarations: [IncomeListComponent, IncomeComponent],
@@ -43,6 +44,7 @@ import { FormsModule } from '@angular/forms';
     ConfirmPopupModule,
     TooltipModule,
     TagModule,
+    DropdownModule,
   ],
 })
 export class IncomeModule {}

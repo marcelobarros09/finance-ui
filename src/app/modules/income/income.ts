@@ -5,4 +5,5 @@ export class Income {
   status?: string;
   dateDue?: Date;
   dateReceipt?: Date;
+  categoryId?: number;
 }

@@ -4,6 +4,10 @@ import { ExpenseService } from './../expense.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Expense } from './../expense';
 import { Component, OnInit } from '@angular/core';
+import {
+  CategoryResponse,
+  CategoryService,
+} from '../../category/category.service';
 
 @Component({
   selector: 'app-expense',
@@ -18,17 +22,26 @@ export class ExpenseComponent implements OnInit {
   private id?: number;
   expense = new Expense();
   editing = false;
+  categories: CategoryResponse[] = [];
 
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private expenseService: ExpenseService,
     private messageService: MessageService,
-    private errorHandlerService: ErrorHandlerService
+    private errorHandlerService: ErrorHandlerService,
+    private categoryService: CategoryService
   ) {}
 
   ngOnInit(): void {
     this.id = this.activatedRoute.snapshot.params['id'];
+
+    this.categoryService.findByType('EXPENSE').subscribe({
+      next: (result) => {
+        this.categories = result;
+      },
+      error: (error) => this.onError(error),
+    });
 
     if (this.id) {
       this.findById(this.id);
@@ -44,7 +57,7 @@ export class ExpenseComponent implements OnInit {
         this.expense = result;
         this.convertDates(this.expense);
       },
-      error: (error) => this.errorHandlerService.handle(error),
+      error: (error) => this.onError(error),
     });
   }
 
@@ -67,7 +80,7 @@ export class ExpenseComponent implements OnInit {
           detail: 'Saved successfully',
         });
       },
-      error: (error) => this.errorHandlerService.handle(error),
+      error: (error) => this.onError(error),
     });
   }
 
@@ -81,7 +94,7 @@ export class ExpenseComponent implements OnInit {
         });
         this.router.navigate(['/expense', result.id]);
       },
-      error: (error) => this.errorHandlerService.handle(error),
+      error: (error) => this.onError(error),
     });
   }
 
@@ -95,7 +108,7 @@ export class ExpenseComponent implements OnInit {
           detail: 'Paid successfully',
         });
       },
-      error: (error) => this.errorHandlerService.handle(error),
+      error: (error) => this.onError(error),
     });
   }
 
@@ -109,7 +122,7 @@ export class ExpenseComponent implements OnInit {
           detail: 'Payment canceled successfully',
         });
       },
-      error: (error) => this.errorHandlerService.handle(error),
+      error: (error) => this.onError(error),
     });
   }
 
@@ -137,5 +150,9 @@ export class ExpenseComponent implements OnInit {
     var dateParts = dateString.split('-');
     var date = new Date(dateParts[0], dateParts[1] - 1, dateParts[2]);
     return date;
+  }
+
+  private onError(error: any): void {
+    return this.errorHandlerService.handle(error);
   }
 }

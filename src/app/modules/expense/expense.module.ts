@@ -20,13 +20,10 @@ import { ExpenseRoutingModule } from './expense-routing.module';
 import { ExpenseListComponent } from './expense-list/expense-list.component';
 import { ExpenseComponent } from './expense/expense.component';
 import { FormsModule } from '@angular/forms';
-
+import { DropdownModule } from 'primeng/dropdown';
 
 @NgModule({
-  declarations: [
-    ExpenseListComponent,
-    ExpenseComponent
-  ],
+  declarations: [ExpenseListComponent, ExpenseComponent],
   imports: [
     CommonModule,
     ExpenseRoutingModule,
@@ -44,7 +41,9 @@ import { FormsModule } from '@angular/forms';
     ConfirmPopupModule,
     TooltipModule,
     TagModule,
-    FormsModule
-  ]
+    FormsModule,
+    DropdownModule,
+    TagModule,
+  ],
 })
-export class ExpenseModule { }
+export class ExpenseModule {}

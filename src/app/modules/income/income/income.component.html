@@ -4,6 +4,20 @@
       <h5>
         <i class="pi pi-fw pi-arrow-up" style="color: #689f38"></i>
         Income
+        <p-tag
+          *ngIf="!isReceived()"
+          icon="pi pi-exclamation-triangle"
+          value="OPEN"
+          severity="danger"
+          [style]="{ 'margin-left': '5px' }"
+        />
+        <p-tag
+          *ngIf="isReceived()"
+          icon="pi pi-check"
+          value="RECEIVED"
+          severity="success"
+          [style]="{ 'margin-left': '5px' }"
+        />
       </h5>
 
       <br />
@@ -40,19 +54,7 @@
             ></app-input-message>
           </div>
 
-          <div class="field col-12 md:col-6">
-            <label for="status">Status</label>
-            <p-selectButton
-              [(ngModel)]="income.status"
-              [options]="statusOptions"
-              optionLabel="label"
-              optionValue="value"
-              [disabled]="true"
-              name="status"
-            ></p-selectButton>
-          </div>
-
-          <div class="field col-12 md:col-6">
+          <div class="field col-12 md:col-2">
             <label for="amount">Amount</label>
             <p-inputNumber
               [(ngModel)]="income.amount"
@@ -71,7 +73,22 @@
             ></app-input-message>
           </div>
 
-          <div class="field col-12 md:col-6">
+          <div class="field col-12 md:col-4">
+            <label for="category">Category</label>
+            <p-dropdown
+              [options]="categories"
+              [(ngModel)]="income.categoryId"
+              optionLabel="name"
+              optionValue="id"
+              name="active"
+              placeholder="Select a Category"
+              [filter]="true"
+              filterBy="name"
+              [showClear]="true"
+            ></p-dropdown>
+          </div>
+
+          <div class="field col-12 md:col-2">
             <label for="dateDue">Date due</label>
             <p-calendar
               [(ngModel)]="income.dateDue"
@@ -91,7 +108,7 @@
             ></app-input-message>
           </div>
 
-          <div class="field col-12 md:col-6" *ngIf="isReceived()">
+          <div class="field col-12 md:col-2" *ngIf="isReceived()">
             <label for="dateReceipt">Date receipt</label>
             <p-calendar
               [(ngModel)]="income.dateReceipt"
@@ -110,6 +127,7 @@
             ></app-input-message>
           </div>
 
+          <div class="col-offset-8" *ngIf="!isReceived()"></div>
           <div class="col-offset-6" *ngIf="isReceived()"></div>
 
           <div class="field col-12 md:col-3">

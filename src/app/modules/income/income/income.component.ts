@@ -5,6 +5,10 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { ErrorHandlerService } from '../../core/error-handler.service';
+import {
+  CategoryResponse,
+  CategoryService,
+} from '../../category/category.service';
 
 @Component({
   selector: 'app-income',
@@ -19,17 +23,26 @@ export class IncomeComponent implements OnInit {
   private id?: number;
   income = new Income();
   editing = false;
+  categories: CategoryResponse[] = [];
 
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private incomeService: IncomeService,
     private messageService: MessageService,
-    private errorHandlingService: ErrorHandlerService
+    private errorHandlingService: ErrorHandlerService,
+    private categoryService: CategoryService
   ) {}
 
   ngOnInit(): void {
     this.id = this.activatedRoute.snapshot.params['id'];
+
+    this.categoryService.findByType('INCOME').subscribe({
+      next: (result) => {
+        this.categories = result;
+      },
+      error: (error) => this.onError(error),
+    });
 
     if (this.id) {
       this.findById(this.id);

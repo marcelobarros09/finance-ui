@@ -4,6 +4,20 @@
       <h5>
         <i class="pi pi-fw pi-arrow-down" style="color: #d32f2f"></i>
         Expense
+        <p-tag
+          *ngIf="!isPaid()"
+          icon="pi pi-exclamation-triangle"
+          value="OPEN"
+          severity="danger"
+          [style]="{ 'margin-left': '5px' }"
+        />
+        <p-tag
+          *ngIf="isPaid()"
+          icon="pi pi-check"
+          value="PAID"
+          severity="success"
+          [style]="{ 'margin-left': '5px' }"
+        />
       </h5>
 
       <br />
@@ -40,19 +54,7 @@
             ></app-input-message>
           </div>
 
-          <div class="field col-12 md:col-6">
-            <label for="status">Status</label>
-            <p-selectButton
-              [(ngModel)]="expense.status"
-              [options]="statusOptions"
-              optionLabel="label"
-              optionValue="value"
-              [disabled]="true"
-              name="status"
-            ></p-selectButton>
-          </div>
-
-          <div class="field col-12 md:col-6">
+          <div class="field col-12 md:col-2">
             <label for="amount">Amount</label>
             <p-inputNumber
               [(ngModel)]="expense.amount"
@@ -71,7 +73,22 @@
             ></app-input-message>
           </div>
 
-          <div class="field col-12 md:col-6">
+          <div class="field col-12 md:col-4">
+            <label for="category">Category</label>
+            <p-dropdown
+              [options]="categories"
+              [(ngModel)]="expense.categoryId"
+              optionLabel="name"
+              optionValue="id"
+              name="active"
+              placeholder="Select a Category"
+              [filter]="true"
+              filterBy="name"
+              [showClear]="true"
+            ></p-dropdown>
+          </div>
+
+          <div class="field col-12 md:col-2">
             <label for="dateDue">Date due</label>
             <p-calendar
               [(ngModel)]="expense.dateDue"
@@ -91,7 +108,7 @@
             ></app-input-message>
           </div>
 
-          <div class="field col-12 md:col-6" *ngIf="isPaid()">
+          <div class="field col-12 md:col-2" *ngIf="isPaid()">
             <label for="datePayment">Date payment</label>
             <p-calendar
               [(ngModel)]="expense.datePayment"
@@ -110,6 +127,7 @@
             ></app-input-message>
           </div>
 
+          <div class="col-offset-8" *ngIf="!isPaid()"></div>
           <div class="col-offset-6" *ngIf="isPaid()"></div>
 
           <div class="field col-12 md:col-3">

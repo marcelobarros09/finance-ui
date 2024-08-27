@@ -5,4 +5,5 @@ export class Expense {
   status?: string;
   dateDue?: Date;
   datePayment?: Date;
+  categoryId?: number;
 }
