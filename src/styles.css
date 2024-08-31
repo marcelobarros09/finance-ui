@@ -1,0 +1,8 @@
+.p-datatable .p-datatable-tbody > tr > td {
+    padding: 0.5rem 0.5rem;
+}
+
+.button-icon {
+    width: 2rem !important;
+    height: 2rem !important;
+}

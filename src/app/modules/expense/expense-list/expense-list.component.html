@@ -126,7 +126,7 @@
                   pTooltip="Edit"
                   [routerLink]="['/expense', expense.id]"
                   icon="pi pi-pencil"
-                  class="p-button-rounded p-button-outlined p-button-secondary mr-2"
+                  class="p-button-rounded p-button-outlined p-button-secondary mr-2 button-icon"
                 ></button>
                 <button
                   pButton
@@ -135,7 +135,7 @@
                   *ngIf="expense.status === 'OPEN'"
                   (click)="pay(expense.id)"
                   icon="pi pi-dollar"
-                  class="p-button-rounded p-button-outlined p-button-secondary mr-2"
+                  class="p-button-rounded p-button-outlined p-button-secondary mr-2 button-icon"
                 ></button>
                 <button
                   pButton
@@ -143,7 +143,7 @@
                   pTooltip="Delete"
                   (click)="delete($event, expense.id)"
                   icon="pi pi-trash"
-                  class="p-button-rounded p-button-outlined p-button-secondary"
+                  class="p-button-rounded p-button-outlined p-button-secondary button-icon"
                 ></button>
               </div>
             </td>
